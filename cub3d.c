@@ -6,7 +6,7 @@
 /*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:59:05 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 08:36:51 by jdegluai         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:24:39 by jdegluai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	key(int key, t_data *data)
 		moove_c_left(data);
 	if (key == XK_Right)
 		moove_c_right(data);
+	if (data->my_mlx.img)
+		mlx_destroy_image(data->mlx, data->my_mlx.img);
 	put_wall(data);
 	return (0);
 }
@@ -68,23 +70,26 @@ int	key(int key, t_data *data)
 int	main(int ac, char **av)
 {
 	t_data		data;
-	t_data_pars	*pars;
 
 	if (ac != 2)
 		return (ft_printf("Error\nIl faut un argument.\n"), 0);
-	pars = malloc(sizeof(t_data_pars));
-	if (parsing(av, pars) == 0)
-		return (0);
-	data.pars = pars;
-	data.map = pars->maze;
+	data.pars = malloc(sizeof(t_data_pars));
 	data.mlx = mlx_init();
+	if (parsing(av, data.pars, &data) == 0)
+		return (0);
+	data.map = data.pars->maze;
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "cub3d");
 	player_position(&data);
 	put_wall(&data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, key, &data);
 	mlx_hook(data.win, 17, 0L, mlx_loop_end, data.mlx);
 	mlx_loop(data.mlx);
+	mlx_destroy_image(data.mlx, data.my_mlx.img);
+	mlx_destroy_image(data.mlx, data.pars->no);
+	mlx_destroy_image(data.mlx, data.pars->so);
+	mlx_destroy_image(data.mlx, data.pars->we);
+	mlx_destroy_image(data.mlx, data.pars->ea);
 	mlx_destroy_window(data.mlx, data.win);
 	mlx_destroy_display(data.mlx);
-	free_all(&data, pars);
+	free_all(&data, data.pars);
 }
