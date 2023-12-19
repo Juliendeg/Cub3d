@@ -6,7 +6,7 @@
 /*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:50:47 by pduhamel          #+#    #+#             */
-/*   Updated: 2023/12/19 12:17:30 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:59:09 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,9 @@
 #include "libft/libft.h"
 #include "mlx/mlx.h"
 
-void	print_err(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	write(2, "Error\n", 6);
-	write(2, str, i);
-}
-
-//checker les leaks
-void	error_texture(t_data *data)
-{
-	free(data->pars);
-	print_err("Loading textures failed\n");
-	exit(1);
-}
-
 char	*get_path_textures(char *line)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	i += 2;
@@ -52,11 +33,12 @@ void	*textures(char *line, t_data *data)
 	path = get_path_textures(line);
 	img = mlx_xpm_file_to_image(data->mlx, path, &data->size, &data->size2);
 	if (!img)
-		error_texture(data);
+		error_texture(data->pars);
 	return (img);
 }
 
-void get_textures(char *line, t_index *index, t_data *data, t_data_pars *pars)
+void	get_textures(char *line, t_index *index, t_data *data,
+		t_data_pars *pars)
 {
 	if (!ft_strncmp(line, "NO ", 3))
 		pars->no = textures(line, data);
@@ -66,6 +48,5 @@ void get_textures(char *line, t_index *index, t_data *data, t_data_pars *pars)
 		pars->ea = textures(line, data);
 	else if (!ft_strncmp(line, "WE ", 3))
 		pars->we = textures(line, data);
-	// free(line);
 	index->n_texture++;
 }
