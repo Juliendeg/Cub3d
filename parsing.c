@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 11:39:26 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/12 13:53:15 by jdegluai         ###   ########.fr       */
+/*   Updated: 2023/12/19 11:51:27 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	get_line(char **av)
 	return (nbr_line);
 }
 
-int	parsing(char **av, t_data_pars *pars)
+int	parsing(char **av, t_data_pars *pars, t_data *data)
 {
 	int	line;
 
@@ -72,6 +72,6 @@ int	parsing(char **av, t_data_pars *pars)
 	if (!pars->maze)
 		return (printf("error\n"), 0);
 	pars->nbr_line = line;
-	read_map(av[1], pars);
+	read_map(av[1], pars, data);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:33:58 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/13 12:10:59 by jdegluai         ###   ########.fr       */
+/*   Updated: 2023/12/19 12:17:45 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ typedef struct s_my_mlx
 
 typedef struct s_data_pars
 {
-	int		no;
-	int		ea;
-	int		so;
-	int		we;
+	void 	*no;
+	void 	*ea;
+	void 	*so;
+	void 	*we;
 	int		c;
 	int		f;
 	char	**maze;
@@ -91,6 +91,8 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	char		**map;
+	int			size;
+	int			size2;
 	t_my_mlx	my_mlx;
 	t_data_pars	*pars;
 }t_data;
@@ -98,11 +100,12 @@ typedef struct s_data
 typedef struct s_index {
 	int	n_derc;
 	int	n_color;
+	int	n_texture;
 	int	maze_index;
 	int	new_line;
 }	t_index;
 
-int		parsing(char **av, t_data_pars *pars);
+int		parsing(char **av, t_data_pars *pars, t_data *data);
 
 double	fix_view(t_data *data, double angle);
 
@@ -115,8 +118,10 @@ void	moove_front(t_data *data);
 void	moove_right(t_data *data);
 void	player_position(t_data *data);
 void	error_color(t_data_pars *pars);
-void	read_map(char *av, t_data_pars *pars);
+void	read_map(char *av, t_data_pars *pars, t_data *data);
 void	get_colors(t_data_pars *pars, char *line, t_index *index);
 void	my_mlx_pixel_put(t_my_mlx *data, int x, int y, int color);
+void	print_err(char *str);
+void	get_textures(char *line, t_index *index, t_data *data, t_data_pars *pars);
 
 #endif

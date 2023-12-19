@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:13:18 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/13 16:45:10 by jdegluai         ###   ########.fr       */
+/*   Updated: 2023/12/19 11:58:21 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,15 @@
 void	draw(t_data *data, int i, char dir)
 {
 	(void)i;
+
 	if (dir == 'N')
-		my_mlx_pixel_put(&data->my_mlx, data->height, data->width,
-			data->pars->no);
+		mlx_put_image_to_window(data->mlx, data->win, data->pars->no, data->height, data->width);
 	else if (dir == 'S')
-		my_mlx_pixel_put(&data->my_mlx, data->height, data->width,
-			data->pars->so);
+		mlx_put_image_to_window(data->mlx, data->win, data->pars->so, data->height, data->width);
 	else if (dir == 'W')
-		my_mlx_pixel_put(&data->my_mlx, data->height, data->width,
-			data->pars->we);
+		mlx_put_image_to_window(data->mlx, data->win, data->pars->we, data->height, data->width);
 	else if (dir == 'E')
-		my_mlx_pixel_put(&data->my_mlx, data->height, data->width,
-			data->pars->ea);
+		mlx_put_image_to_window(data->mlx, data->win, data->pars->ea, data->height, data->width);
 }
 
 double	calc_dis(double y_player,

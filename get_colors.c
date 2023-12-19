@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_colors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:55:27 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/12 13:53:15 by jdegluai         ###   ########.fr       */
+/*   Updated: 2023/12/19 11:42:18 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	error_color(t_data_pars *pars)
 {
 	free(pars);
-	printf(" error color \n");
+	print_err("Color init failed\n");
 	exit(1);
 }
 
@@ -76,17 +76,9 @@ int	colors(char *line, char *type)
 
 void	get_colors(t_data_pars *pars, char *line, t_index *index)
 {
-	if (!ft_strncmp(line, "no ", 3))
-		pars->no = colors(line, " no");
-	else if (!ft_strncmp(line, "so ", 3))
-		pars->so = colors(line, " so");
-	else if (!ft_strncmp(line, "ea ", 3))
-		pars->ea = colors(line, " ea");
-	else if (!ft_strncmp(line, "we ", 3))
-		pars->we = colors(line, " we");
-	else if (!ft_strncmp(line, "c ", 2))
-		pars->c = colors(line, " c");
-	else if (!ft_strncmp(line, "f ", 2))
-		pars->f = colors(line, " f");
+	if (!ft_strncmp(line, "C ", 2))
+		pars->c = colors(line, " C");
+	else if (!ft_strncmp(line, "F ", 2))
+		pars->f = colors(line, " F");
 	index->n_color++;
 }
