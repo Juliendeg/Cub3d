@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:41:22 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 12:17:52 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/19 14:24:04 by jdegluai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@
 void	aff_line(t_data_pars *pars, t_index *index, char *line)
 {
 	if (pars->c == -1 || pars->f == -1 || index->n_color != 2)
-	{
-		printf("ici %d\n", index->n_color);
 		error_color(pars);
-	}
 	if (index->n_texture != 4)
 	{
 		free(pars);

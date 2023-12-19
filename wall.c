@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:13:18 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 11:58:21 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:53:13 by jdegluai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_h/cub3d.h"
 #include "libft/libft.h"
 
-void	draw(t_data *data, int i, char dir)
+void	draw(t_data *data, float i, char dir)
 {
-	(void)i;
-
+	// (void)i;
+	// printf("val: %f\n", i);
 	if (dir == 'N')
-		mlx_put_image_to_window(data->mlx, data->win, data->pars->no, data->height, data->width);
+		my_mlx_pixel_put(&data->my_mlx, data->height, data->width, ((int *)data->my_mlx.addr_n)[(int)(i * 64) * 64 + ((int)data->px) % 64]);
 	else if (dir == 'S')
-		mlx_put_image_to_window(data->mlx, data->win, data->pars->so, data->height, data->width);
+		my_mlx_pixel_put(&data->my_mlx, data->height, data->width, ((int *)data->my_mlx.addr_s)[(int)(i * 64) * 64 + ((int)data->px) % 64]);
 	else if (dir == 'W')
-		mlx_put_image_to_window(data->mlx, data->win, data->pars->we, data->height, data->width);
+		my_mlx_pixel_put(&data->my_mlx, data->height, data->width, ((int *)data->my_mlx.addr_w)[(int)(i * 64) * 64 + ((int)data->py) % 64]);
 	else if (dir == 'E')
-		mlx_put_image_to_window(data->mlx, data->win, data->pars->ea, data->height, data->width);
+		my_mlx_pixel_put(&data->my_mlx, data->height, data->width, ((int *)data->my_mlx.addr_e)[(int)(i * 64) * 64 + ((int)data->py) % 64]);
 }
 
 double	calc_dis(double y_player,
@@ -48,7 +48,7 @@ void	final_cast(double distance, int height, t_data *data, char dir)
 	while (data->width < 1080.00 && data->width < data->flo_cei
 		+ data->projection_3d && ++i < 1080.0)
 	{
-		draw(data, i, dir);
+		draw(data, i / data->projection_3d, dir);
 		data->width++;
 	}
 	while (data->width < 1080.00)
@@ -57,29 +57,29 @@ void	final_cast(double distance, int height, t_data *data, char dir)
 
 void	ft_raycasting(t_data *data, double angle, int x)
 {
-	double	px;
-	double	py;
+	// double	px;
+	// double	py;
 
 	data->dir = '\0';
-	px = data->x_player;
-	py = data->y_player;
+	data->px = data->x_player;
+	data->py = data->y_player;
 	data->xfoot = cos((angle) * (M_PI / 180));
 	data->yfoot = sin((angle) * (M_PI / 180));
 	while (1)
 	{
-		data->x = (int)(px / 64.00);
-		data->y = (int)(py / 64.00);
+		data->x = (int)(data->px / 64.00);
+		data->y = (int)(data->py / 64.00);
 		if (data->map[data->y][data->x] == '1'
-			|| data->map[(int)(((py - data->yfoot) / 64))][data->x] == '1'
-			|| data->map[data->y][(int)(((px - data->xfoot) / 64))] == '1')
+			|| data->map[(int)(((data->py - data->yfoot) / 64))][data->x] == '1'
+			|| data->map[data->y][(int)(((data->px - data->xfoot) / 64))] == '1')
 		{
-			data->distance = calc_dis(data->y_player, data->x_player, py, px);
-			data->dir = set_directions(py, px, data);
+			data->distance = calc_dis(data->y_player, data->x_player, data->py, data->px);
+			data->dir = set_directions(data->py, data->px, data);
 			data->where = (int)(data->where * (1000.00 / 64.00)) % 1000;
 			break ;
 		}
-		px += data->xfoot;
-		py += data->yfoot;
+		data->px += data->xfoot;
+		data->py += data->yfoot;
 	}
 	final_cast(fix_view(data, angle), x, data, data->dir);
 }
