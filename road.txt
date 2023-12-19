@@ -1,0 +1,18 @@
+map : 
+	- ferme
+	- check au moins un spwan
+	- espace remplacer par 0
+
+ordre :
+
+	- d'abord les textures + couleurs sep by whitespace
+	- gerer que des 1 |  0 ou space ou ENSW sinon fail 
+	- si plus de deux ENSW 
+	- map
+
+texture : 
+	png to xpm 
+
+check :
+
+	- error on fd : 2 
