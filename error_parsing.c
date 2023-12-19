@@ -6,7 +6,7 @@
 /*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:53:51 by pduhamel          #+#    #+#             */
-/*   Updated: 2023/12/19 17:58:57 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:04:53 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	err_map(t_data_pars *pars)
 
 void	error_texture(t_data_pars *pars)
 {
-	free(pars);
+	if (pars)
+		free(pars);
 	print_err("Loading textures failed.\n");
 	exit(1);
 }
