@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:41:22 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 14:24:04 by jdegluai         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:14:26 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,23 @@ void	aff_line(t_data_pars *pars, t_index *index, char *line)
 	if (pars->c == -1 || pars->f == -1 || index->n_color != 2)
 		error_color(pars);
 	if (index->n_texture != 4)
-	{
-		free(pars);
-		print_err("Texture init failed\n");
-		exit(1);
-	}
+		error_color(pars);
 	pars -> maze[index->maze_index] = ft_strdup(line);
 	index -> maze_index++;
 }
 
-void	err_map(t_data_pars *pars)
+void	print_map(t_data_pars *pars)
 {
-	free(pars);
-	printf("error map\n");
-	exit (1);
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (pars->maze[x])
+	{
+		printf("%s\n", pars->maze[x]);
+		x++;
+	}
 }
 
 void	get_map(t_data_pars *pars, char *line, t_index *i, t_data *data)
@@ -88,4 +91,5 @@ void	read_map(char *av, t_data_pars *pars, t_data *data)
 		free(ptr);
 	}
 	pars->maze[i.maze_index] = 0;
+	check_map(pars, i.maze_index);
 }

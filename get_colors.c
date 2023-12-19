@@ -6,7 +6,7 @@
 /*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:55:27 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 11:42:18 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/19 13:53:14 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	error_color(t_data_pars *pars)
 {
 	free(pars);
-	print_err("Color init failed\n");
+	print_err("Color init failed.\n");
 	exit(1);
 }
 

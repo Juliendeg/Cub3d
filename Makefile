@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+         #
+#    By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 12:22:13 by jdegluai          #+#    #+#              #
-#    Updated: 2023/12/19 15:24:52 by jdegluai         ###   ########.fr        #
+#    Updated: 2023/12/19 18:14:20 by pduhamel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = cub3d.c parsing.c read_map.c wall.c wall_utils.c player.c direction.c get_colors.c moove.c get_textures.c put_texture.c
+SRCS = cub3d.c parsing.c read_map.c wall.c wall_utils.c player.c direction.c get_colors.c moove.c get_textures.c check_map.c error_parsing.c
 
 NAME = cub3d
 

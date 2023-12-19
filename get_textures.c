@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 10:50:47 by pduhamel          #+#    #+#             */
-/*   Updated: 2023/12/19 17:17:15 by jdegluai         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:14:13 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,9 @@
 #include "libft/libft.h"
 #include "mlx/mlx.h"
 
-void	print_err(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	write(2, "Error\n", 6);
-	write(2, str, i);
-}
-
-//checker les leaks
-void	error_texture(t_data *data)
-{
-	free(data->pars);
-	print_err("Loading textures failed\n");
-	exit(1);
-}
-
 char	*get_path_textures(char *line)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	i += 2;
@@ -52,11 +33,12 @@ void	*textures(char *line, t_data *data)
 	path = get_path_textures(line);
 	img = mlx_xpm_file_to_image(data->mlx, path, &data->size, &data->size2);
 	if (!img)
-		error_texture(data);
+		error_texture(data->pars);
 	return (img);
 }
 
-void get_textures(char *line, t_index *index, t_data *data, t_data_pars *pars)
+void	get_textures(char *line, t_index *index, t_data *data,
+		t_data_pars *pars)
 {
 	if (!ft_strncmp(line, "NO ", 3))
 	{
@@ -76,7 +58,10 @@ void get_textures(char *line, t_index *index, t_data *data, t_data_pars *pars)
 	else if (!ft_strncmp(line, "WE ", 3))
 	{
 		pars->we = textures(line, data);
+<<<<<<< HEAD
 		data->my_mlx.addr_w = mlx_get_data_addr(pars->we, &data->my_mlx.bpp_w, &data->my_mlx.l_len_w, &data->my_mlx.endian_w);
 	}
+=======
+>>>>>>> parsing
 	index->n_texture++;
 }
