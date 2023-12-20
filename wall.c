@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:13:18 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/20 11:46:57 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:44:31 by jdegluai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,20 @@ double	calc_dis(double y_player,
 
 void	final_cast(double distance, int height, t_data *data, char dir)
 {
-	int	i;
-
-	i = -1;
 	data->width = 0;
 	data->dst_to_projection = ((1920.00 / 2) / (tan((32.00) * (M_PI / 180))));
 	data->projection_3d = (64.00 / distance) * data->dst_to_projection;
-	data->flo_cei = (1080.00 / 2) - (data->projection_3d / 2);
-	while (data->width < 1080.00 && data->width < data->flo_cei)
-		my_mlx_pixel_put(&data->my_mlx, height, data->width++, data->pars->c);
-	while (data->width < 1080.00 && data->width < data->flo_cei
-		+ data->projection_3d && ++i < 1080.0)
-	{
-		draw(data, i / data->projection_3d, dir);
-		data->width++;
-	}
+	data->flo_ce = (1080.00 / 2) - (data->projection_3d / 2);
 	while (data->width < 1080.00)
-		my_mlx_pixel_put(&data->my_mlx, height, data->width++, data->pars->f);
+	{
+		if (data->width < data->flo_ce)
+			my_mlx_pixel_put(&data->my_mlx, height, data->width, data->pars->c);
+		else if (data->width < data->flo_ce + data->projection_3d)
+			draw(data, (data->width - data->flo_ce) / data->projection_3d, dir);
+		else
+			my_mlx_pixel_put(&data->my_mlx, height, data->width, data->pars->f);
+		++data->width;
+	}
 }
 
 void	ft_raycasting(t_data *data, double angle, int x)
