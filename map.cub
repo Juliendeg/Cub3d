@@ -6,7 +6,9 @@ EA ./textures/ea.xpm
 
 WE ./textures/we.xpm
 
-F 159,69,19
+
+
+F 159,69   ,19
 
 C 119,136,153
 
