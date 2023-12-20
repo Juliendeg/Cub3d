@@ -6,14 +6,14 @@
 /*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 11:39:26 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 11:51:27 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/20 10:41:19 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_h/cub3d.h"
 #include "libft/libft.h"
 
-void	init_pars(t_data_pars *pars)
+void	init_pars(t_data_pars *pars, t_data *data)
 {
 	pars->no = 0;
 	pars->so = 0;
@@ -23,6 +23,7 @@ void	init_pars(t_data_pars *pars)
 	pars->f = -1;
 	pars->maze = 0;
 	pars->nbr_line = 0;
+	pars->mlx = data->mlx;
 }
 
 int	check_cub(char *c)
@@ -62,7 +63,7 @@ int	parsing(char **av, t_data_pars *pars, t_data *data)
 {
 	int	line;
 
-	init_pars(pars);
+	init_pars(pars, data);
 	if (check_cub(av[1]) == -1)
 		return (printf("Error\nIl faut un fichier .cub\n"), 0);
 	line = get_line(av);
@@ -71,6 +72,7 @@ int	parsing(char **av, t_data_pars *pars, t_data *data)
 	pars->maze = malloc(line * sizeof(char *));
 	if (!pars->maze)
 		return (printf("error\n"), 0);
+	*pars->maze = 0;
 	pars->nbr_line = line;
 	read_map(av[1], pars, data);
 	return (1);

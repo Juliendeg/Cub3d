@@ -6,20 +6,20 @@
 /*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:41:22 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 18:14:26 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/20 11:37:58 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_h/cub3d.h"
 #include "libft/libft.h"
 
-void	aff_line(t_data_pars *pars, t_index *index, char *line)
+void	aff_line(t_data *data, t_index *index, char *line)
 {
-	if (pars->c == -1 || pars->f == -1 || index->n_color != 2)
-		error_color(pars);
+	if (data->pars->c == -1 || data->pars->f == -1 || index->n_color != 2)
+		error_color(data, line);
 	if (index->n_texture != 4)
-		error_color(pars);
-	pars -> maze[index->maze_index] = ft_strdup(line);
+		error_texture(data, line);
+	data->pars -> maze[index->maze_index] = ft_strdup(line);
 	index -> maze_index++;
 }
 
@@ -42,15 +42,16 @@ void	get_map(t_data_pars *pars, char *line, t_index *i, t_data *data)
 	char	*ptr;
 
 	ptr = ft_strtrim(line, " ");
+	data->parsing = ptr;
 	if (!ft_strncmp(ptr, "SO ", 3) || !ft_strncmp(ptr, "NO ", 3)
 		|| !ft_strncmp(ptr, "WE ", 3) || !ft_strncmp(ptr, "EA ", 3))
 		get_textures(line, i, data, pars);
-	if (!ft_strncmp(ptr, "F ", 2) || !ft_strncmp(ptr, "C ", 2))
+	if ((!ft_strncmp(ptr, "F ", 2) || !ft_strncmp(ptr, "C ", 2)))
 		get_colors(pars, ptr, i);
-	else if ((ptr[0] == '1' || ptr[0] == '0' || i->maze_index != 0))
+	else if (ptr[0] == '1' || ptr[0] == '0' || i->maze_index != 0)
 	{
 		if (ptr[0] == '1' || ptr[0] == '0')
-			aff_line(pars, i, line);
+			aff_line(data, i, line);
 		free(ptr);
 		ptr = 0;
 	}
@@ -85,11 +86,11 @@ void	read_map(char *av, t_data_pars *pars, t_data *data)
 		if (line == 0)
 			break ;
 		if (line[0] == '\n' && i.maze_index != 0)
-			err_map(pars);
+			err_map(pars, data);
 		line = ft_strtrim(line, "\n");
-		get_map(pars, line, &i, data);
 		free(ptr);
+		get_map(pars, line, &i, data);
 	}
 	pars->maze[i.maze_index] = 0;
-	check_map(pars, i.maze_index);
+	check_map(pars, i.maze_index, data);
 }

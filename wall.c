@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:13:18 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 16:53:13 by jdegluai         ###   ########.fr       */
+/*   Updated: 2023/12/20 11:46:57 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,31 @@
 
 void	draw(t_data *data, float i, char dir)
 {
-	// (void)i;
-	// printf("val: %f\n", i);
 	if (dir == 'N')
-		my_mlx_pixel_put(&data->my_mlx, data->height, data->width, ((int *)data->my_mlx.addr_n)[(int)(i * 64) * 64 + ((int)data->px) % 64]);
+		my_mlx_pixel_put(&data->my_mlx, data->height, data->width,
+			((int *)data->my_mlx.addr_n)[(int)(i * 64)
+			*64 + ((int)data->px) % 64]);
 	else if (dir == 'S')
-		my_mlx_pixel_put(&data->my_mlx, data->height, data->width, ((int *)data->my_mlx.addr_s)[(int)(i * 64) * 64 + ((int)data->px) % 64]);
+		my_mlx_pixel_put(&data->my_mlx, data->height, data->width,
+			((int *)data->my_mlx.addr_s)[(int)(i * 64)
+			*64 + ((int)data->px) % 64]);
 	else if (dir == 'W')
-		my_mlx_pixel_put(&data->my_mlx, data->height, data->width, ((int *)data->my_mlx.addr_w)[(int)(i * 64) * 64 + ((int)data->py) % 64]);
+		my_mlx_pixel_put(&data->my_mlx, data->height, data->width,
+			((int *)data->my_mlx.addr_w)[(int)(i * 64) *64
+			+ ((int)data->py) % 64]);
 	else if (dir == 'E')
-		my_mlx_pixel_put(&data->my_mlx, data->height, data->width, ((int *)data->my_mlx.addr_e)[(int)(i * 64) * 64 + ((int)data->py) % 64]);
+		my_mlx_pixel_put(&data->my_mlx, data->height, data->width,
+			((int *)data->my_mlx.addr_e)[(int)(i * 64) *64
+			+ ((int)data->py) % 64]);
 }
 
 double	calc_dis(double y_player,
-	double x_player, double y_wall, double x_wall)
+				double x_player,
+				double y_wall,
+				double x_wall)
 {
-	return (sqrt(((x_player - x_wall) * (x_player - x_wall))
-			+ ((y_player - y_wall) * (y_player - y_wall))));
+	return (sqrt(((x_player - x_wall) * (x_player - x_wall)) + ((y_player
+					- y_wall) * (y_player - y_wall))));
 }
 
 void	final_cast(double distance, int height, t_data *data, char dir)
@@ -57,9 +65,6 @@ void	final_cast(double distance, int height, t_data *data, char dir)
 
 void	ft_raycasting(t_data *data, double angle, int x)
 {
-	// double	px;
-	// double	py;
-
 	data->dir = '\0';
 	data->px = data->x_player;
 	data->py = data->y_player;
@@ -69,11 +74,13 @@ void	ft_raycasting(t_data *data, double angle, int x)
 	{
 		data->x = (int)(data->px / 64.00);
 		data->y = (int)(data->py / 64.00);
-		if (data->map[data->y][data->x] == '1'
-			|| data->map[(int)(((data->py - data->yfoot) / 64))][data->x] == '1'
-			|| data->map[data->y][(int)(((data->px - data->xfoot) / 64))] == '1')
+		if (data->map[data->y][data->x] == '1' || data->map[(int)(((data->py
+						- data->yfoot) / 64))][data->x] == '1'
+			|| data->map[data->y][(int)(((data->px - data->xfoot)
+					/ 64))] == '1')
 		{
-			data->distance = calc_dis(data->y_player, data->x_player, data->py, data->px);
+			data->distance = calc_dis(data->y_player, data->x_player, data->py,
+					data->px);
 			data->dir = set_directions(data->py, data->px, data);
 			data->where = (int)(data->where * (1000.00 / 64.00)) % 1000;
 			break ;
@@ -92,7 +99,9 @@ void	put_wall(t_data *data)
 	angle = data->player_view - 32.00;
 	data->my_mlx.img = mlx_new_image(data->mlx, 1920.00, 1080.00);
 	data->my_mlx.addr = mlx_get_data_addr(data->my_mlx.img,
-			&data->my_mlx.bpp, &data->my_mlx.line_len, &data->my_mlx.endian);
+			&data->my_mlx.bpp,
+			&data->my_mlx.line_len,
+			&data->my_mlx.endian);
 	while (++data->height < 1920.00)
 	{
 		ft_raycasting(data, angle, data->height);

@@ -6,7 +6,7 @@
 /*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:16:28 by pduhamel          #+#    #+#             */
-/*   Updated: 2023/12/19 17:58:34 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/20 11:41:23 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ int	is_dir(char c)
 	return (0);
 }
 
-int	get_spawn(char *spawn, t_data_pars *pars, int i, int x)
+int	get_spawn(char *spawn, t_data *data, int i, int x)
 {
-	if (is_dir(pars->maze[i][x]))
+	if (is_dir(data->pars->maze[i][x]))
 	{
 		if (*spawn != -1)
-			err_map(pars);
+			err_map(data);
 		return (1);
 	}
-	else if (pars->maze[i][x] != '0' && pars->maze[i][x] != '1'
-			&& pars->maze[i][x] != ' ')
-		err_map(pars);
+	else if (data->pars->maze[i][x] != '0' && data->pars->maze[i][x] != '1'
+			&& data->pars->maze[i][x] != ' ')
+		err_map(data);
 	return (0);
 }
 
@@ -51,24 +51,26 @@ int	check_char(char *a, char *b, char *c)
 	return (0);
 }
 
-void	ft_check_maze(int i, int x, int len_maze, t_data_pars *pars)
+int	ft_check_maze(int i, int x, int len_maze, t_data *data)
 {
 	int	len;
 
-	len = ft_strlen(pars->maze[i]);
+	len = ft_strlen(data->pars->maze[i]);
 	if (x == 0 || x == len - 1 || i == 0 || i == len_maze - 1)
-		err_map(pars);
-	if (i > 0 && check_char(&pars->maze[i - 1][x], &pars->maze[i - 1][x - 1],
-			&pars->maze[i - 1][x + 1]))
-		err_map(pars);
-	if (check_char(&pars->maze[i][x - 1], &pars->maze[i][x + 1], NULL))
-		err_map(pars);
-	if (check_char(&pars->maze[i + 1][x], &pars->maze[i + 1][x - 1],
-			&pars->maze[i + 1][x + 1]))
-		err_map(pars);
+		err_map(data);
+	if (i > 0 && check_char(&data->pars->maze[i - 1][x], &data->pars->maze[i
+			- 1][x - 1], &data->pars->maze[i - 1][x + 1]))
+		err_map(data);
+	if (check_char(&data->pars->maze[i][x - 1], &data->pars->maze[i][x + 1],
+			NULL))
+		err_map(data);
+	if (check_char(&data->pars->maze[i + 1][x], &data->pars->maze[i + 1][x - 1],
+			&data->pars->maze[i + 1][x + 1]))
+		err_map(data);
+	return (1);
 }
 
-void	check_map(t_data_pars *pars, int len_maze)
+void	check_map(t_data_pars *pars, int len_maze, t_data *data)
 {
 	char	spawn;
 	int		i;
@@ -83,12 +85,13 @@ void	check_map(t_data_pars *pars, int len_maze)
 		len = ft_strlen(pars->maze[i]);
 		while (++x < len)
 		{
-			if (get_spawn(&spawn, pars, i, x))
+			if (get_spawn(&spawn, data, i, x) && ft_check_maze(i, x, len_maze,
+					data))
 				spawn = pars->maze[i][x];
 			if (pars->maze[i][x] == '0')
-				ft_check_maze(i, x, len_maze, pars);
+				ft_check_maze(i, x, len_maze, data);
 		}
 	}
 	if (spawn == -1)
-		err_map(pars);
+		err_map(data);
 }

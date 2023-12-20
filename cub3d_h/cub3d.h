@@ -6,7 +6,7 @@
 /*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:33:58 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 18:14:33 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/20 11:39:53 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_data_pars
 	int		f;
 	char	**maze;
 	int		nbr_line;
+	void	*mlx;
 }	t_data_pars;
 
 typedef struct s_data
@@ -90,6 +91,7 @@ typedef struct s_data
 	int			size;
 	int			size2;
 	char		*color_c;
+	char		*parsing;
 	t_my_mlx	my_mlx;
 	t_data_pars	*pars;
 }t_data;
@@ -119,15 +121,15 @@ void	moove_left(t_data *data);
 void	moove_front(t_data *data);
 void	moove_right(t_data *data);
 void	player_position(t_data *data);
-void	error_color(t_data_pars *pars);
+void	error_color(t_data *data, char *line);
 void	read_map(char *av, t_data_pars *pars, t_data *data);
 void	get_colors(t_data_pars *pars, char *line, t_index *index);
 void	my_mlx_pixel_put(t_my_mlx *data, int x, int y, int color);
-void	print_err(char *str);
-void	err_map(t_data_pars *pars);
+void	print_err(char *str, t_data *data);
+void	err_map(t_data *data);
 void	print_map(t_data_pars *pars);
-void	check_map(t_data_pars *pars, int len_maze);
-void	error_texture(t_data_pars *pars);
+void	check_map(t_data_pars *pars, int len_maze, t_data *data);
+void	error_texture(t_data *data, char *line);
 void	get_textures(char *line, t_index *index, t_data *data, t_data_pars *pars);
 
 #endif

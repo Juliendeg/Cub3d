@@ -6,19 +6,12 @@
 /*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:55:27 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 13:53:14 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:24:52 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_h/cub3d.h"
 #include "libft/libft.h"
-
-void	error_color(t_data_pars *pars)
-{
-	free(pars);
-	print_err("Color init failed.\n");
-	exit(1);
-}
 
 int	stat_color(char s, int *vergul, int *nbr, int *rgb)
 {

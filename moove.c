@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moove.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:50:45 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 10:04:06 by jdegluai         ###   ########.fr       */
+/*   Updated: 2023/12/20 11:42:18 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	apply_coll(t_data *data, double step_x, double step_y)
 {
 	int		y_map;
 	int		x_map;
-	
+
 	y_map = (int)((data->y_player + step_y) / 64.0);
 	x_map = (int)((data->x_player + step_x) / 64.0);
 	if (data->map[(int)(data->y_player / 64.0)][x_map] == '0')
