@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 10:56:17 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/12 13:53:15 by jdegluai         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:09:42 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBfT_H
-# define LIBfT_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
 # include <stdio.h>
 # include <fcntl.h>
@@ -22,8 +22,8 @@
 # include <unistd.h>
 # include <limits.h>
 
-# ifndef BUffER_SIZE
-#  define BUffER_SIZE 10000000
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10000000
 # endif
 
 typedef struct s_list

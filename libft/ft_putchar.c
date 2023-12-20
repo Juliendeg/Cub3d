@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdegluai <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   created: 2022/12/07 12:36:46 by jdegluai          #+#    #+#             */
 /*   Updated: 2022/12/07 12:36:49 by jdegluai         ###   ########.fr       */

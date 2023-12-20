@@ -6,7 +6,7 @@
 #    By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 12:22:13 by jdegluai          #+#    #+#              #
-#    Updated: 2023/12/19 18:14:20 by pduhamel         ###   ########.fr        #
+#    Updated: 2023/12/20 15:00:50 by pduhamel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,10 +48,11 @@ ${LIBFT} :
 clean :
 		@rm -rf ${OBJS_DIR}
 		@make clean -C libft
+		@make clean -C mlx
 
 fclean : clean
 		@make clean -C mlx
-		@make clean -C libft
+		@make fclean -C libft
 		@rm -f ${NAME}
 
 re : fclean all

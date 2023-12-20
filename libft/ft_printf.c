@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdegluai <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   created: 2022/12/07 12:36:23 by jdegluai          #+#    #+#             */
 /*   Updated: 2022/12/07 12:36:27 by jdegluai         ###   ########.fr       */
@@ -14,7 +14,7 @@
 
 int	ft_letter(const char *str, va_list arg, int i, int x)
 {
-	if (str[i] == )
+	if (str[i] == 'c')
 		x = x + ft_putchar(va_arg(arg, int));
 	else if (str[i] == 's')
 		x = x + ft_putstr(va_arg(arg, char *));
