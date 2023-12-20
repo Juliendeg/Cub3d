@@ -6,7 +6,7 @@
 /*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:33:58 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/20 11:57:32 by jdegluai         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:44:30 by jdegluai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_data
 	int			width;
 	double		dst_to_projection;
 	double		projection_3d;
-	double		flo_cei;
+	double		flo_ce;
 	double		distance;
 	double		where;
 	int			y;
