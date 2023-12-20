@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:33:58 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/20 11:39:53 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/20 11:57:32 by jdegluai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ typedef struct s_my_mlx
 
 typedef struct s_data_pars
 {
-	void 	*no;
-	void 	*ea;
-	void 	*so;
-	void 	*we;
+	void	*no;
+	void	*ea;
+	void	*so;
+	void	*we;
 	int		c;
 	int		f;
 	char	**maze;
@@ -108,28 +108,28 @@ int		parsing(char **av, t_data_pars *pars, t_data *data);
 
 double	fix_view(t_data *data, double angle);
 
-char	set_directions(double w_y, double w_x, t_data *wind);
 char	*e_texture(t_data *mlx, int i);
 char	*s_texture(t_data *mlx, int i);
 char	*n_texture(t_data *mlx, int i);
 char	*w_texture(t_data *mlx, int i);
+char	set_directions(double w_y, double w_x, t_data *wind);
 
-
+void	err_map(t_data *data);
 void	put_wall(t_data *data);
 void	moove_back(t_data *data);
 void	moove_left(t_data *data);
 void	moove_front(t_data *data);
 void	moove_right(t_data *data);
+void	print_map(t_data_pars *pars);
 void	player_position(t_data *data);
+void	print_err(char *str, t_data *data);
 void	error_color(t_data *data, char *line);
+void	error_texture(t_data *data, char *line);
 void	read_map(char *av, t_data_pars *pars, t_data *data);
 void	get_colors(t_data_pars *pars, char *line, t_index *index);
 void	my_mlx_pixel_put(t_my_mlx *data, int x, int y, int color);
-void	print_err(char *str, t_data *data);
-void	err_map(t_data *data);
-void	print_map(t_data_pars *pars);
 void	check_map(t_data_pars *pars, int len_maze, t_data *data);
-void	error_texture(t_data *data, char *line);
-void	get_textures(char *line, t_index *index, t_data *data, t_data_pars *pars);
+void	get_textures(char *line, t_index *index,
+			t_data *data, t_data_pars *pars);
 
 #endif

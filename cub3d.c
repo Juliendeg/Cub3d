@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdegluai <jdegluai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:59:05 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 18:22:38 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/20 11:55:46 by jdegluai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	moove_c_left(t_data *data)
 		data->player_view = 0;
 	if (data->player_view < 0)
 		data->player_view = 360.0;
-	// printf("angle : %f\n", data->player_view);
 }
 
 void	moove_c_right(t_data *data)
@@ -30,7 +29,6 @@ void	moove_c_right(t_data *data)
 		data->player_view = 0;
 	if (data->player_view < 0)
 		data->player_view = 360.0;
-	// printf("angle : %f\n", data->player_view);
 }
 
 void	free_all(t_data *data, t_data_pars	*pars)
