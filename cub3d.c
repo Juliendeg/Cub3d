@@ -6,7 +6,7 @@
 /*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:59:05 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/19 18:22:38 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/20 13:51:54 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ int	main(int ac, char **av)
 	t_data		data;
 
 	if (ac != 2)
-		return (ft_printf("Error\nIl faut un argument.\n"), 0);
+		return (ft_putstr_fd("Error\nIl faut un argument.\n", 2), 1);
 	data.pars = malloc(sizeof(t_data_pars));
 	data.mlx = mlx_init();
-	if (parsing(av, data.pars, &data) == 0)
-		return (0);
+	if (parsing(av, data.pars, &data) == 1)
+		return (1);
 	data.map = data.pars->maze;
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "cub3d");
 	player_position(&data);
@@ -92,4 +92,5 @@ int	main(int ac, char **av)
 	mlx_destroy_window(data.mlx, data.win);
 	mlx_destroy_display(data.mlx);
 	free_all(&data, data.pars);
+	return (0);
 }

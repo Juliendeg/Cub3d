@@ -6,7 +6,7 @@
 /*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:41:22 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/20 11:37:58 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/20 13:25:22 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	read_map(char *av, t_data_pars *pars, t_data *data)
 		if (line == 0)
 			break ;
 		if (line[0] == '\n' && i.maze_index != 0)
-			err_map(pars, data);
+			err_map(data);
 		line = ft_strtrim(line, "\n");
 		free(ptr);
 		get_map(pars, line, &i, data);

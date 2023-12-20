@@ -6,7 +6,7 @@
 /*   By: pduhamel <pduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 11:39:26 by jdegluai          #+#    #+#             */
-/*   Updated: 2023/12/20 10:41:19 by pduhamel         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:06:18 by pduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_line(char **av)
 	nbr_line = 0;
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		return (perror(av[1]), 0);
+		return (ft_putstr_fd("Error\n", 2), perror(av[1]), 0);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -65,15 +65,20 @@ int	parsing(char **av, t_data_pars *pars, t_data *data)
 
 	init_pars(pars, data);
 	if (check_cub(av[1]) == -1)
-		return (printf("Error\nIl faut un fichier .cub\n"), 0);
+		return (print_err("Il faut un fichier .cub\n", data), 1);
 	line = get_line(av);
 	if (line == 0)
-		return (0);
+	{
+		mlx_destroy_display(data->pars->mlx);
+		free(data->pars->mlx);
+		free(data->pars);
+		return (1);
+	}
 	pars->maze = malloc(line * sizeof(char *));
 	if (!pars->maze)
-		return (printf("error\n"), 0);
+		return (print_err("Malloc failed.\n", data), 1);
 	*pars->maze = 0;
 	pars->nbr_line = line;
 	read_map(av[1], pars, data);
-	return (1);
+	return (0);
 }
