@@ -51,6 +51,8 @@ make re      # fclean + all
 - Flèches gauche / droite : tourner la caméra
 - Échap : quitter
 
+<img width="800" height="437" alt="2026-08-1711-37-21-ezgif com-crop" src="https://github.com/user-attachments/assets/84e51b67-d68a-480e-968d-aed9daa35634" />
+
 ## Format du fichier .cub
 
 ```
