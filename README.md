@@ -102,7 +102,3 @@ map.cub        carte d'exemple
 ## Erreurs gérées
 
 Nombre d'arguments, extension du fichier, textures/couleurs manquantes ou invalides, carte non fermée, spawn absent ou en double, caractères invalides dans la carte.
-
-## Licence
-
-MiniLibX sous licence 42 (voir mlx/LICENSE). Reste du code : projet pédagogique.
